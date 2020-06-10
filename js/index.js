@@ -52,7 +52,7 @@ $(document).ready(function() {
            alert('O wins')
            count = 0
            o_win++
-    $('#o_win').text(o_win)
+    $('#o-win').text(o_win)
             }
       }
        else  
@@ -65,7 +65,7 @@ $(document).ready(function() {
          alert('X wins')
          count = 0
          x_win++
-         $('#x_win').text(x_win)
+         $('#x-win').text(x_win)
             }
       }
     
