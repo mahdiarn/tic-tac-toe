@@ -1,4 +1,5 @@
 // JavaScript Document
+"use strict";
 $(document).ready(function() {
     var x = "x"
     var o = "o"
