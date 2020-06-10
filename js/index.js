@@ -1,5 +1,15 @@
 // JavaScript Document
 "use strict";
+function announceWinner(winner = '', restart = true) {
+    if (winner.length == 0) return alert('Its a tie. It will restart.');
+
+    if (restart) {
+        return alert(`${winner} has won the game. Start a new game`)
+    } else {
+        return alert(`${winner} wins`)
+    }
+}
+
 $(document).ready(function() {
     let x = "x"
     let o = "o"
@@ -10,7 +20,7 @@ $(document).ready(function() {
     
       if ($("#one").hasClass('o') && $("#two").hasClass('o') && $("#three").hasClass('o') || $("#four").hasClass('o') && $("#five").hasClass('o') && $("#six").hasClass('o') || $("#seven").hasClass('o') && $("#eight").hasClass('o') && $("#nine").hasClass('o') || $("#one").hasClass('o') && $("#four").hasClass('o') && $("#seven").hasClass('o') || $("#two").hasClass('o') && $("#five").hasClass('o') && $("#eight").hasClass('o') || $("#three").hasClass('o') && $("#six").hasClass('o') && $("#nine").hasClass('o') || $("#one").hasClass('o') && $("#five").hasClass('o') && $("#nine").hasClass('o') || $("#three").hasClass('o') && $("#five").hasClass('o') && $("#seven").hasClass('o'))
        {
-         alert('O has won the game. Start a new game')
+         announceWinner('O');
          $("#game li").text("+");
         $("#game li").removeClass('disable')
         $("#game li").removeClass('o')
@@ -20,7 +30,7 @@ $(document).ready(function() {
        }
       else if ($("#one").hasClass('x') && $("#two").hasClass('x') && $("#three").hasClass('x') || $("#four").hasClass('x') && $("#five").hasClass('x') && $("#six").hasClass('x') || $("#seven").hasClass('x') && $("#eight").hasClass('x') && $("#nine").hasClass('x') || $("#one").hasClass('x') && $("#four").hasClass('x') && $("#seven").hasClass('x') || $("#two").hasClass('x') && $("#five").hasClass('x') && $("#eight").hasClass('x') || $("#three").hasClass('x') && $("#six").hasClass('x') && $("#nine").hasClass('x') || $("#one").hasClass('x') && $("#five").hasClass('x') && $("#nine").hasClass('x') || $("#three").hasClass('x') && $("#five").hasClass('x') && $("#seven").hasClass('x'))
       {
-       alert('X wins has won the game. Start a new game')
+        announceWinner('X');
        $("#game li").text("+");
         $("#game li").removeClass('disable')
         $("#game li").removeClass('o')
@@ -30,7 +40,7 @@ $(document).ready(function() {
       }
       else if (count == 9)
       {
-        alert('Its a tie. It will restart.')
+        announceWinner();
         $("#game li").text("+");
         $("#game li").removeClass('disable')
         $("#game li").removeClass('o')
@@ -50,7 +60,7 @@ $(document).ready(function() {
           $(this).addClass('disable o btn-primary')
             if ($("#one").hasClass('o') && $("#two").hasClass('o') && $("#three").hasClass('o') || $("#four").hasClass('o') && $("#five").hasClass('o') && $("#six").hasClass('o') || $("#seven").hasClass('o') && $("#eight").hasClass('o') && $("#nine").hasClass('o') || $("#one").hasClass('o') && $("#four").hasClass('o') && $("#seven").hasClass('o') || $("#two").hasClass('o') && $("#five").hasClass('o') && $("#eight").hasClass('o') || $("#three").hasClass('o') && $("#six").hasClass('o') && $("#nine").hasClass('o') || $("#one").hasClass('o') && $("#five").hasClass('o') && $("#nine").hasClass('o') || $("#three").hasClass('o') && $("#five").hasClass('o') && $("#seven").hasClass('o'))
             {
-           alert('O wins')
+           announceWinner("O", false);
            count = 0
            o_win++
     $('#o-win').text(o_win)
@@ -63,7 +73,7 @@ $(document).ready(function() {
         $(this).addClass('disable x btn-info')
            if ($("#one").hasClass('x') && $("#two").hasClass('x') && $("#three").hasClass('x') || $("#four").hasClass('x') && $("#five").hasClass('x') && $("#six").hasClass('x') || $("#seven").hasClass('x') && $("#eight").hasClass('x') && $("#nine").hasClass('x') || $("#one").hasClass('x') && $("#four").hasClass('x') && $("#seven").hasClass('x') || $("#two").hasClass('x') && $("#five").hasClass('x') && $("#eight").hasClass('x') || $("#three").hasClass('x') && $("#six").hasClass('x') && $("#nine").hasClass('x') || $("#one").hasClass('x') && $("#five").hasClass('x') && $("#nine").hasClass('x') || $("#three").hasClass('x') && $("#five").hasClass('x') && $("#seven").hasClass('x'))
             {
-         alert('X wins')
+         announceWinner("X", false);
          count = 0
          x_win++
          $('#x-win').text(x_win)
