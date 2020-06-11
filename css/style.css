@@ -1,83 +1,214 @@
-/*******tic-tac-toe******/
-#header, #footer, #content {
-    position: fixed;
+@import url(https://fonts.googleapis.com/css?family=PT+Mono);
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.red {
+    color: #FF005C;
+}
+
+.blue {
+    color: #0385B6;
+}
+
+.green {
+    color: #00D49C;
+}
+
+.btn-green {
+    background-color: #00D49C;
+    border: thin solid #00D49C;
+}
+.btn-green:hover {
+    background-color: #008864;
+    border: thin solid #008864;
+}
+
+body {
+  background-color: #e5e5e5;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 50vmin;
+  height: 50vmin;
+  margin: auto;
+  background-color: #e5e5e5;
+}
+
+.reset-container {
+    position: absolute;
+    bottom: 0;
     left: 0;
     right: 0;
-    overflow-y:scroll;
-}
-
-#header {
-    top: 0;
-    height: 20%;
-
-}
-
-#header .row {
-    padding-top: -10px;
     display: flex;
     justify-content: center;
 }
 
-#footer {
-    bottom: 0;
-    height: 4%;
-}
-#content {
-    position: fixed;
-    top: 20%;
-    bottom: 5%;
-    overflow: auto;
-    border-top: .1px solid black;
+.row {
+  height: 10vmin;
 }
 
-#game {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    margin: 0;
+.cell {
+  float: left;
+  width: 10vmin;
+  height: 10vmin;
+  position: relative;
 }
 
-#game li {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    color:#ccc;
+.x:before {
+  position: absolute;
+  top: 0;
+  left: 4.5vmin;
+  content: "";
+  display: block;
+  width: 1.5vmin;
+  height: 10vmin;
+  background-color: #0385B6;
+  border-radius: 5px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
-#game li.disable, #reset{
-    color:#fff;
+.x:after {
+  position: absolute;
+  top: 0;
+  left: 4.5vmin;
+  content: "";
+  display: block;
+  width: 1.5vmin;
+  height: 10vmin;
+  background-color: #0385B6;
+  border-radius: 5px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
-.title {
-    font-size: calc(12px + 5vw);
+.o {
+  position: absolute;
+  top: 1vmin;
+  left: 1vmin;
+  width: 8vmin;
+  height: 8vmin;
+  border: 1.5vmin solid #FF005C;
+  border-radius: 50%;
 }
 
-#reset {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:20px;
-    text-transform:uppercase;
-    width:100%;
-    height: 500px;
+.hline {
+    position: absolute;
+    height: 1vmin;
+    width: 48vmin;
+    left: 1vmin;
+    border-radius: 50px;
+    background-color: #333;
 }
 
-#tic-tac-toe .disable {
-    text-transform: uppercase;
-    font-size: 30px;
-    font-family: Georgia, "Times New Roman", Times, serif;
+.vline {
+    position: absolute;
+    width: 1vmin;
+    height: 48vmin;
+    top: 1vmin;
+    border-radius: 50px;
+    background-color: #333;
+  }
+
+.line1 {
+    top: 9.5vmin;
 }
 
-#tic-tac-toe {
-    margin:0 auto;
-}
-#tic-tac-toe li::-moz-selection, #tic-tac-toe li::-webkit-selection {
-    background:none;
-    color:#000;
+.line2 {
+    top: 19.5vmin;
 }
 
-.input-append .win-times {
-    background:#fff;
+.line3{
+    bottom: 19.5vmin;
 }
 
-/*******tic-tac-toe END******/
+.line4 {
+    bottom: 9.5vmin;
+}
+
+.line5 {
+    left: 9.5vmin;
+}
+
+.line6 {
+    left: 19.5vmin;
+}
+
+.line7 {
+    right: 19.5vmin;
+}
+
+.line8 {
+    right: 9.5vmin;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+  color: #333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  background-color: #e5e5e5;
+  padding: 15px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px 20px 10px 20px;
+  padding: 1vmin 4vmin 2vmin 4vmin;
+  font-size: 300%;
+  font-size: 10vmin;
+  background-color: transparent;
+  outline: none;
+  border-style: solid;
+  font-family: 'PT Mono', sans;
+}
+button:hover {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.x-color, .o-color {
+  color: #ccc;
+  border-color: #ccc;
+}
+
+.winner {
+  font-size: 150%;
+}
+
+p {
+  margin: 5px;
+}
