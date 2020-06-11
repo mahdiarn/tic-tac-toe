@@ -153,20 +153,25 @@ class Game {
   restartGame() {
     this.roundCount = 0;
     this.board = this.generateBoard(this.boardLength);
-    console.log(this.board)
     this.rerender();
   }
 
   resetSquareLength() {
     this.squareLength = (window.innerWidth > (window.innerHeight * 0.75)) ? (window.innerHeight * 0.75) : window.innerWidth;
     this.squareLength = ((this.squareLength * 10) / (Math.sqrt(this.board.length) * 10)) - 2;
+    $(".title").css({ fontSize: (window.innerWidth > (window.innerHeight * 0.75)) ? 'calc(12px + 1vh)' : 'calc(12px + 5vw)' });
+    $("#reset").css({
+      fontSize: (window.innerWidth > (window.innerHeight * 0.75)) ? 'calc(12px + 1vh)' : 'calc(12px + 5vw)',
+    });
+
+    
     this.rerender();
   }
 }
 
 $(document).ready(function() {
   let tictactoe = new Game(5);
-  tictactoe.rerender();
+  tictactoe.resetSquareLength();
   $(window).resize(function(){
     tictactoe.resetSquareLength();
     tictactoe.rerender();
