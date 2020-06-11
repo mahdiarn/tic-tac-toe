@@ -7,6 +7,22 @@ html {
   box-sizing: inherit;
 }
 
+.red {
+    color: #FF005C;
+}
+
+.blue {
+    color: #0385B6;
+}
+
+.yellow {
+    color: #FDDF08;
+}
+
+.green {
+    color: #00D49C;
+}
+
 body {
   background-color: #e5e5e5;
 }
