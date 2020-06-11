@@ -66,6 +66,7 @@ class Game {
     for (let i = 0; i < winLength; i++) {
       const [a, b, c, d, e] = win[i];
       if (
+        (this.board[a] !== null) &&
         (this.board[a] === this.board[b]) &&
         (this.board[a] === this.board[c]) &&
         (this.board[a] === this.board[d]) &&
@@ -88,7 +89,6 @@ class Game {
   }
 
   rerender() {
-    this.printGrid();
     let boardSize = this.board.length;
     $('#o-win').text(this.oScore);
     $('#x-win').text(this.xScore);
