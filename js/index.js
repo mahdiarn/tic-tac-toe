@@ -88,62 +88,14 @@ class Game {
     }
   }
 
-  rerender() {
-    let boardSize = this.board.length;
-    $('#o-win').text(this.oScore);
-    $('#x-win').text(this.xScore);
-    $('#game').empty();
-    $('#game').css('max-width', (window.innerHeight * 0.75));
-    $('#game').css('margin-left', Math.max(
-      (window.innerWidth - (window.innerHeight * 0.75)) / 2,
-      0
-    ));
-    for (let i=0; i<boardSize; i++) {
-      let id = `button-${i+1}`
-      switch (this.board[i]) {
-        case true:
-          $('#game').append(`<li id="${id}" class="btn btn-primary span1"><div id="square-${id}" class="square-label">o</div></li>`);
-          break;
-        case false:
-          $('#game').append(`<li id="${id}" class="btn btn-info span1"><div id="square-${id}" class="square-label">x</div></li>`);
-          break;
-        default:
-          $('#game').append(`<li id="${id}" class="btn span1"><div id="square-${id}" class="square-label">+</div></li>`);
-      }
-      $(`#${id}`).width(this.squareLength);
-      $(`#${id}`).height(this.squareLength);
-      $(`#${id} .square-label`).position('relative');
-      $(`#${id} .square-label`).css({
-        fontSize: this.squareLength,
-        height: this.squareLength,
-        lineHeight: `min(100% - 1vw, 80px)`,
-        overflow: 'hidden'
-      });
+  render() {
+    for (let i = 0; i<25; i++) {
+      $(`${i}`).empty();
+      let value = this.getGrid(i);
+      if (value !== null) $(`#${i}`).html(value ? '<div class="o"></div>' : '<div class="x"></div>');
     }
-    
-    $('#game li').click((e) => {
-      let index = Number(e.target.id.split("-")[2]) - 1;
-      if (this.getGrid(index) !== null) return alert("Already selected")
-      this.setGrid(
-        index,
-        (this.roundCount % 2 == 0) ? true : false
-      );
-      this.rerender();
-      this.roundCount++;
-      let winner = this.decideWinner();
-      if (
-        (this.roundCount === 25) &&
-        (winner === null)
-      ) {
-        this.announceWinner();
-      } else if (winner !== null) {
-        this.announceWinner(winner ? 'O' : 'X');
-        this.setScore(winner);
-      } else {
-        return true
-      }
-      return this.restartGame();
-    });
+    $('#o-score').text(this.oScore);
+    $('#x-score').text(this.xScore);
   }
 
   setScore(winner) {
@@ -153,7 +105,7 @@ class Game {
   restartGame() {
     this.roundCount = 0;
     this.board = this.generateBoard(this.boardLength);
-    this.rerender();
+    this.render();
   }
 
   resetSquareLength() {
@@ -165,20 +117,39 @@ class Game {
     });
 
     
-    this.rerender();
+    this.render();
   }
 }
 
 $(document).ready(function() {
   let tictactoe = new Game(5);
   tictactoe.resetSquareLength();
-  $(window).resize(function(){
-    tictactoe.resetSquareLength();
-    tictactoe.rerender();
+  tictactoe.printGrid();
+  $('.cell').click((e) => {
+    let idx = Number(e.target.id);
+    if (tictactoe.getGrid(idx) !== null) return alert("Already selected")
+    tictactoe.setGrid(
+      idx,
+      (tictactoe.roundCount % 2 == 0) ? true : false
+    );
+    tictactoe.render();
+    tictactoe.roundCount++;
+    tictactoe.printGrid();
+    let winner = tictactoe.decideWinner();
+    if (
+      (tictactoe.roundCount === 25) &&
+      (winner === null)
+    ) {
+      tictactoe.announceWinner();
+    } else if (winner !== null) {
+      tictactoe.announceWinner(winner ? 'O' : 'X');
+      tictactoe.setScore(winner);
+    } else {
+      return true
+    }
+    return tictactoe.restartGame();
   });
   $('#reset').click(function() {
     tictactoe.restartGame();
   });
 });
-    
-    
