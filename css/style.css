@@ -15,12 +15,17 @@ html {
     color: #0385B6;
 }
 
-.yellow {
-    color: #FDDF08;
-}
-
 .green {
     color: #00D49C;
+}
+
+.btn-green {
+    background-color: #00D49C;
+    border: thin solid #00D49C;
+}
+.btn-green:hover {
+    background-color: #008864;
+    border: thin solid #008864;
 }
 
 body {
@@ -37,6 +42,15 @@ body {
   height: 50vmin;
   margin: auto;
   background-color: #e5e5e5;
+}
+
+.reset-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .row {

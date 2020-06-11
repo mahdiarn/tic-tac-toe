@@ -12,7 +12,6 @@ class Game {
     this.oScore = 0;
     this.xScore = 0;
     this.roundCount = 0;
-    this.resetSquareLength();
   }
 
   generateBoard(boardLength) {
@@ -90,7 +89,7 @@ class Game {
 
   render() {
     for (let i = 0; i<25; i++) {
-      $(`${i}`).empty();
+      $(`#${i}`).empty();
       let value = this.getGrid(i);
       if (value !== null) $(`#${i}`).html(value ? '<div class="o"></div>' : '<div class="x"></div>');
     }
@@ -108,22 +107,19 @@ class Game {
     this.render();
   }
 
-  resetSquareLength() {
-    this.squareLength = (window.innerWidth > (window.innerHeight * 0.75)) ? (window.innerHeight * 0.75) : window.innerWidth;
-    this.squareLength = ((this.squareLength * 10) / (Math.sqrt(this.board.length) * 10)) - 2;
-    $(".title").css({ fontSize: (window.innerWidth > (window.innerHeight * 0.75)) ? 'calc(12px + 1vh)' : 'calc(12px + 5vw)' });
-    $("#reset").css({
-      fontSize: (window.innerWidth > (window.innerHeight * 0.75)) ? 'calc(12px + 1vh)' : 'calc(12px + 5vw)',
-    });
+  resetGame() {
+    this.oScore = 0;
+    this.xScore = 0;
+    this.restartGame();
+  }
 
-    
+  resetSquareLength() {    
     this.render();
   }
 }
 
 $(document).ready(function() {
   let tictactoe = new Game(5);
-  tictactoe.resetSquareLength();
   tictactoe.printGrid();
   $('.cell').click((e) => {
     let idx = Number(e.target.id);
@@ -149,7 +145,11 @@ $(document).ready(function() {
     }
     return tictactoe.restartGame();
   });
-  $('#reset').click(function() {
+  $('#restart').click(function() {
     tictactoe.restartGame();
+  });
+
+  $('#reset').click(function() {
+    tictactoe.resetGame();
   });
 });
