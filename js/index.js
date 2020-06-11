@@ -116,7 +116,7 @@ class Game {
       $(`#${id} .square-label`).css({
         fontSize: this.squareLength,
         height: this.squareLength,
-        lineHeight: `calc(100% - 4vw)`,
+        lineHeight: `min(100% - 1vw, 80px)`,
         overflow: 'hidden'
       });
     }
